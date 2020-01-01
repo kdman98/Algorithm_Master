@@ -1,0 +1,19 @@
+정렬에 관한 프로젝트.
+
+index 1 is insertion sort,
+index 2 is quick sort,
+index 3 is merge sort,
+index 4 is my sort - which must be most efficient.
+
+4번째 함수인 나만의 정렬을 가장 효율적이게 만들어 내는것이 목표이다.
+
+나만의 정렬 함수에 대한 설명 ( introsort + insertion sort )
+
+introsort 함수의 시작에서, log n을 구하는 작업을 거친다. log n은 limit 변수에 저장된다.
+만약 input의 개수가 16개 이하라면, insertion sort로 메모리 이동을 최소화하고 정렬한 뒤 끝낸다.
+그 외의 경우, 퀵 소트를 진행한다. 퀵 소트의 경우 index 2의 퀵  소트와 피벗을 정하는 기준이 다르다는 것 외에는 대부분 동일하지만, 
+재귀적인 myquicksort 호출이 depth(이전 함수의 limit)를 넘어서 실행되었을 경우에, 퀵 소트를 중단하고 힙 소트를 할지 말지 결정한다.
+소트가 되지 않은 덩어리의 사이즈가 16 이상일 경우 힙 소트를 실행하고 리턴하지만, 16 미만일경우 그대로 방치하고 리턴한다.
+이렇게 16 미만인 부분들이 소트가 되지 않은 상태인 경우가 존재하므로, myquicksort의 모든 호출이 끝난 뒤에 0~n-1번째 주소를 통틀어 insertionsort를 1회 진행한다.
+퀵 소트와 진행 구도가 비슷하지만, 피벗이 잘못 잡히는 등의 최악의 상황에서 introsort 함수는 힙 소트로 전환하거나 아예 insertion sort를 진행해버리는 방향으로 시간을 단축한다. 
+분명히 insertion sort는 input의 수가 많을 때 가장 시간이 오래 걸리는 작업이지만, input의 수가 적다면 추가 변수나 메모리의 준비 없이 바로 간단하게 실행 가능하므로, 작은 부분들의 insertion sort 진행은 시간 단축에 도움이 될 것이다.
