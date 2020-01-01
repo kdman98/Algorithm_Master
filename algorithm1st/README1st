@@ -1,0 +1,79 @@
+aigoputty.c  <<<  메인 소스 파일 
+LINUX 기반의 프로그램이므로 LINUX에서 실행하는 것을 권장합니다.
+서강대학교 컴퓨터공학과 "알고리즘설계와분석" 과목에서 실행한 프로젝트입니다.
+2차원 배열에서 가장 큰 합을 갖는 subrectangle을 구하는 것이 과제입니다.
+
+--- IMPORTANT ---
+This program should take two command-line arguments: The first one is the input file
+name, and the second one is the algorithm index. An example run is:
+$ ./mp1_20180001 input00001.txt 2 
+-----------------
+
+1.  Problem Description
+You are given a 2D array of integers, such as the following.
+1 2 -1 -4 -20
+-8 -3 4 2 1
+3 8 10 1 3
+-4 -1 1 7 -6
+Your goal is to find a subrectangle, which has the largest sum. For example, sum of the
+following subrectangle is 3. (1,2,-8,-3,3,8)
+1 2 -1 -4 -20
+-8 -3 4 2 1
+3 8 10 1 3
+-4 -1 1 7 -6
+Sum of the following subrectangle is 23. (8,10,1,3,-1,1,7,-6)
+1 2 -1 -4 -20
+-8 -3 4 2 1
+3 8 10 1 3
+-4 -1 1 7 -6
+For this problem, the subrectangle with the largest sum is the following, in which the sum is
+29. (-3,4,2,8,10,1,-1,1,7)
+1 2 -1 -4 -20
+-8 -3 4 2 1
+3 8 10 1 3
+-4 -1 1 7 -6
+you should write the program that finds this largest sum. (You do not need to find
+the position of the subrectangle.)
+There is a special case which you need to consider when implementing algorithms.
+* If all numbers are negative, the maximum sum subrectangle will be a single largest number.
+Below is the example. The '-1' is the answer, and the largest sum is -1.
+-2 -5 -9 -3
+-7 -8 -6 -5
+-12 -3 -1 -7
+-4 -8 -13 -19
+ 
+  There are three different types of algorithms. Their indices are:
+1 – O(n6) algorithm 
+2 – O(n4) algorithm
+3 – O(n3) algorithm
+  The input file format is as follows. Consider the following example.
+4 5
+1 2 -1 -4 -20
+-8 -3 4 2 1
+3 8 10 1 3
+-4 -1 1 7 -6
+- In the first line, there are always two numbers: # of rows and # of columns.
+- From the second line, each line has n numbers, where n is the # of columns.
+- Excluding the first line, there are m lines, where m is the # of rows.
+- In each line, numbers are separated by a single space.
+  Program will produce an output file. The name of the output file is
+“result_inputfilename”. For example, if the input file name is “input00001.txt”, the
+corresponding output file is named “result_input00001.txt”. The output file should
+have 6 lines, containing the following items:
+
+1st line: input file name
+2nd line: algorithm index
+3rd line: # of rows in the given 2D array.
+4th line: # of columns in the given 2D array.
+5th line: sum of the maximum sum subrectangle.
+6th line: running time in milliseconds
+
+In the above example, the sum of the maximum sum subrectangle was 29, so assuming the
+input file name is “input00001.txt” and the algorithm index is 3, your output file should look
+like this:
+input00001.txt
+3
+4
+5
+29
+2.5
