@@ -3,10 +3,10 @@
 #include<time.h>
 #include<string.h>
 
-void vertical_print(); // vWall Á¤º¸¸¦ °¡Áö°í, ÇÑ ÁÙÀ» ±×¸°´Ù. ( ¼¼·Î º® )
-void horizental_print(); // hWall Á¤º¸¸¦ °¡Áö°í, ÇÑ ÁÙÀ» ±×¸°´Ù. ( °¡·Î º® )
-void makeNewHorizontal(); // ÀÌÀü ¼¼·Îº®ÀÇ Á¤º¸¸¦ °¡Áö°í, °¡·Î º®À» ¸¸µç´Ù.
-void makeNewVertical(); // Ã¹ ÁÙ ÀÌÈÄ, ¼¼·Îº®À» ·£´ýÇÏ°Ô ¸¸µç´Ù. 
+void vertical_print(); // vWall ì •ë³´ë¥¼ ê°€ì§€ê³ , í•œ ì¤„ì„ ê·¸ë¦°ë‹¤. ( ì„¸ë¡œ ë²½ )
+void horizental_print(); // hWall ì •ë³´ë¥¼ ê°€ì§€ê³ , í•œ ì¤„ì„ ê·¸ë¦°ë‹¤. ( ê°€ë¡œ ë²½ )
+void makeNewHorizontal(); // ì´ì „ ì„¸ë¡œë²½ì˜ ì •ë³´ë¥¼ ê°€ì§€ê³ , ê°€ë¡œ ë²½ì„ ë§Œë“ ë‹¤.
+void makeNewVertical(); // ì²« ì¤„ ì´í›„, ì„¸ë¡œë²½ì„ ëžœë¤í•˜ê²Œ ë§Œë“ ë‹¤. 
 
 int WIDTH;
 int HIGHT;
@@ -29,24 +29,24 @@ int main() {
 	printf("Hight : ");
 	scanf("%d", &HIGHT);
 
-	hWall = (int*)malloc(sizeof(int)*WIDTH);        // °¡·Î º®. ºóÄ­ÀÇ °¹¼ö¿Í °°´Ù.
-	vWall = (int*)malloc(sizeof(int)*(WIDTH-1));	// ¼¼·Î º®. ºóÄ­ÀÇ °¹¼öº¸´Ù 1°³ ÀÛ´Ù.
-	cell = (int*)malloc(sizeof(int)*WIDTH);			// ºóÄ­µé. ( id¸¦ ÀúÀåÇØ¼­ ÁýÇÕÀ» ±¸ºÐÇÏ´Â µ¥¿¡ ¾²ÀÓ )
-	memset(cell, 0, sizeof(cell));					// ÃÊ±âÈ­.
+	hWall = (int*)malloc(sizeof(int)*WIDTH);        // ê°€ë¡œ ë²½. ë¹ˆì¹¸ì˜ ê°¯ìˆ˜ì™€ ê°™ë‹¤.
+	vWall = (int*)malloc(sizeof(int)*(WIDTH-1));	// ì„¸ë¡œ ë²½. ë¹ˆì¹¸ì˜ ê°¯ìˆ˜ë³´ë‹¤ 1ê°œ ìž‘ë‹¤.
+	cell = (int*)malloc(sizeof(int)*WIDTH);			// ë¹ˆì¹¸ë“¤. ( idë¥¼ ì €ìž¥í•´ì„œ ì§‘í•©ì„ êµ¬ë¶„í•˜ëŠ” ë°ì— ì“°ìž„ )
+	memset(cell, 0, sizeof(cell));					// ì´ˆê¸°í™”.
 	
-	srand(time(NULL)); // ·£´ýÇÑ °ªÀ» ³»±â À§ÇÑ seed ¼³Á¤.
+	srand(time(NULL)); // ëžœë¤í•œ ê°’ì„ ë‚´ê¸° ìœ„í•œ seed ì„¤ì •.
 
 	/*
-		ÇÁ·Î±×·¥ ¼ø¼­.
-		1. Ã¹ ÁÙÀ» ±×¸°´Ù.
-		2. 2 ~ (Height - 1)ÁÙ±îÁö ±×¸°´Ù.
-		3. ¸¶Áö¸· ÁÙÀ» ±×¸°´Ù.
+		í”„ë¡œê·¸ëž¨ ìˆœì„œ.
+		1. ì²« ì¤„ì„ ê·¸ë¦°ë‹¤.
+		2. 2 ~ (Height - 1)ì¤„ê¹Œì§€ ê·¸ë¦°ë‹¤.
+		3. ë§ˆì§€ë§‰ ì¤„ì„ ê·¸ë¦°ë‹¤.
 	*/
 
 	/*
-		Ã¹ ÁÙ.
+		ì²« ì¤„.
 	*/
-	// °¡Àå »ó´ÜÀº ´Ù ¸·ÇûÀ¸¹Ç·Î, °¡·Îº®À» ¸¸µé¾îÁØ´Ù.
+	// ê°€ìž¥ ìƒë‹¨ì€ ë‹¤ ë§‰í˜”ìœ¼ë¯€ë¡œ, ê°€ë¡œë²½ì„ ë§Œë“¤ì–´ì¤€ë‹¤.
 	for (i = 0; i < WIDTH; i++) {
 		fprintf(file, "+-");
 		printf("+-");
@@ -54,35 +54,35 @@ int main() {
 	fprintf(file, "+\n");
 	printf("+\n");
 
-	// ¶Ñ²±À» ¸¸µé¾ú´Ù¸é, ¼¼·Î º®À» ÃÄ¼­ Ã¹ ¹øÂ°·Î ÁýÇÕÀ» ³ª´²ÁØ´Ù.
+	// ëšœê»‘ì„ ë§Œë“¤ì—ˆë‹¤ë©´, ì„¸ë¡œ ë²½ì„ ì³ì„œ ì²« ë²ˆì§¸ë¡œ ì§‘í•©ì„ ë‚˜ëˆ ì¤€ë‹¤.
 	for (i = 0; i < WIDTH - 1; i++) {
-		vWall[i] = rand()%2; // 1ÀÌ ³ª¿À¸é º®À» Ä¡´Â °Å°í, 0ÀÌ ³ª¿À¸é º®À» ¾ÈÄ¡´Â °Å´Ù.
-		if (vWall[i] == 1) { // º®À» Ä¡´Â °æ¿ì.
+		vWall[i] = rand()%2; // 1ì´ ë‚˜ì˜¤ë©´ ë²½ì„ ì¹˜ëŠ” ê±°ê³ , 0ì´ ë‚˜ì˜¤ë©´ ë²½ì„ ì•ˆì¹˜ëŠ” ê±°ë‹¤.
+		if (vWall[i] == 1) { // ë²½ì„ ì¹˜ëŠ” ê²½ìš°.
 			for (j = (prevWall + 1); j <= i; j++) { 
-				// prevWall´Â ÀÌÀü ¼¼·Î º®ÀÇ À§Ä¡¶ó°í º¸¸é µÈ´Ù. 
-				// ÃÊ±âÈ­°¡ -1·Î µÇ¾î ÀÖ¾úÀ¸¹Ç·Î, ±×³É ¸Ç ¿ÞÂÊ º®ÀÌ¾ú´Ù°í »ý°¢ÇÏÀÚ.
-				// ±× º® ´ÙÀ½ºÎÅÍ i¹øÂ° º®±îÁö´Â º®ÀÌ ¾ø´Â »óÅÂ.
+				// prevWallëŠ” ì´ì „ ì„¸ë¡œ ë²½ì˜ ìœ„ì¹˜ë¼ê³  ë³´ë©´ ëœë‹¤. 
+				// ì´ˆê¸°í™”ê°€ -1ë¡œ ë˜ì–´ ìžˆì—ˆìœ¼ë¯€ë¡œ, ê·¸ëƒ¥ ë§¨ ì™¼ìª½ ë²½ì´ì—ˆë‹¤ê³  ìƒê°í•˜ìž.
+				// ê·¸ ë²½ ë‹¤ìŒë¶€í„° ië²ˆì§¸ ë²½ê¹Œì§€ëŠ” ë²½ì´ ì—†ëŠ” ìƒíƒœ.
 				/*
 					|     .      .      |      |      |  
-					-1    0      1      2      3    ¸Ç¿À¸¥ÂÊ
-					ºó Ä­ÀÌ 5°³¶ó¸é
-					º®Àº 4°³, 0 ~ 3¹ø.
-					¸¸¾à vWall[2]¿¡¼­ Ã³À½ 1ÀÌ ³ª¿Ô´Ù¸é ( rand%2 )
-					prevWall = -1 ÀÌ¾úÀ¸¹Ç·Î, for¹®Àº
-					0 ~ 2±îÁö µ¹°Ô µÉ °ÍÀÌ´Ù.
-					ºóÄ­À» ±âÁØÀ¸·Î º»´Ù¸é 2¹ø Á÷Àü ±îÁö°¡ µÇ°í, ÇØ´ç ºóÄ­µéÀº ¸ðµÎ °°Àº id¸¦ °¡Á®¾ß ÇÔ.					
+					-1    0      1      2      3    ë§¨ì˜¤ë¥¸ìª½
+					ë¹ˆ ì¹¸ì´ 5ê°œë¼ë©´
+					ë²½ì€ 4ê°œ, 0 ~ 3ë²ˆ.
+					ë§Œì•½ vWall[2]ì—ì„œ ì²˜ìŒ 1ì´ ë‚˜ì™”ë‹¤ë©´ ( rand%2 )
+					prevWall = -1 ì´ì—ˆìœ¼ë¯€ë¡œ, forë¬¸ì€
+					0 ~ 2ê¹Œì§€ ëŒê²Œ ë  ê²ƒì´ë‹¤.
+					ë¹ˆì¹¸ì„ ê¸°ì¤€ìœ¼ë¡œ ë³¸ë‹¤ë©´ 2ë²ˆ ì§ì „ ê¹Œì§€ê°€ ë˜ê³ , í•´ë‹¹ ë¹ˆì¹¸ë“¤ì€ ëª¨ë‘ ê°™ì€ idë¥¼ ê°€ì ¸ì•¼ í•¨.					
 				*/
 				cell[j] = id; 
 			}
-			prevWall = i; // ¸¸¾à À§¿Í°°Àº °æ¿ì¿´´Ù¸é, i=2, prevWall = 2°¡ µÈ´Ù.
-			id++; // °°Àº ÁýÇÕÀº ¸ðµÎ °°Àº id¸¦ °¡Á³À¸¹Ç·Î, id¸¦ ÇÏ³ª ¿Ã·ÁÁÜ.
+			prevWall = i; // ë§Œì•½ ìœ„ì™€ê°™ì€ ê²½ìš°ì˜€ë‹¤ë©´, i=2, prevWall = 2ê°€ ëœë‹¤.
+			id++; // ê°™ì€ ì§‘í•©ì€ ëª¨ë‘ ê°™ì€ idë¥¼ ê°€ì¡Œìœ¼ë¯€ë¡œ, idë¥¼ í•˜ë‚˜ ì˜¬ë ¤ì¤Œ.
 		}
 	}
 	for (i = prevWall + 1; i < WIDTH; i++) {
 		/*
-			Á¦ÀÏ ¸¶Áö¸· º® ÀÌÈÄ·Î vWall[i]°¡ 1ÀÌ ³ª¿Â ÀûÀÌ ¾ø´Ù¸é,
-			°¡Àå ¿À¸¥ÂÊ º®¿¡ µµ´ÞÇÑ »óÅÂÀÌ³ª,
-			id°¡ ÇÒ´çÀÌ ¾ÈµÇ¾îÀÖÀ½.
+			ì œì¼ ë§ˆì§€ë§‰ ë²½ ì´í›„ë¡œ vWall[i]ê°€ 1ì´ ë‚˜ì˜¨ ì ì´ ì—†ë‹¤ë©´,
+			ê°€ìž¥ ì˜¤ë¥¸ìª½ ë²½ì— ë„ë‹¬í•œ ìƒíƒœì´ë‚˜,
+			idê°€ í• ë‹¹ì´ ì•ˆë˜ì–´ìžˆìŒ.
 		*/
 		cell[i] = id;
 	}
@@ -127,7 +127,7 @@ int main() {
 			}
 		}
 		horizental_print();
-		// ¶Ñ²±À» ¸¸µé¾ú´Ù¸é, ¼¼·Î º®À» ÃÄ¼­ Ã¹ ¹øÂ°·Î ÁýÇÕÀ» ³ª´²ÁØ´Ù.
+		// ëšœê»‘ì„ ë§Œë“¤ì—ˆë‹¤ë©´, ì„¸ë¡œ ë²½ì„ ì³ì„œ ì²« ë²ˆì§¸ë¡œ ì§‘í•©ì„ ë‚˜ëˆ ì¤€ë‹¤.
 		int i, j;
 		int Join_flag = 0;
 		int prev_Id;
@@ -135,17 +135,17 @@ int main() {
 		for (i = 0; i < WIDTH - 1; i++) {
 
 			if (cell[i] != cell[i + 1]) {
-				// ceilÀÌ ´Ù¸£¸é, º®À» Ä¥Áö ¸»Áö Á¤ÇÑ´Ù.
+				// ceilì´ ë‹¤ë¥´ë©´, ë²½ì„ ì¹ ì§€ ë§ì§€ ì •í•œë‹¤.
 				/*
 					+-+-+-+-+-+-+-+-+-+-+
 					|0 0 0|1 1 1 1 1|2|3|
-					+-+-+ +-+-+-+ +-+ + + ÀÌ·± »óÈ²ÀÌ¸é 4!=5 ÀÌ¹Ç·Î ¹Ù·Î µé¾î¿Â´Ù.
+					+-+-+ +-+-+-+ +-+ + + ì´ëŸ° ìƒí™©ì´ë©´ 4!=5 ì´ë¯€ë¡œ ë°”ë¡œ ë“¤ì–´ì˜¨ë‹¤.
 					 4 5   6 7 8   9
 
 				*/
 				Join_flag = rand() % 2;
 
-				if (Join_flag) { // º®À» ¾ÈÄ¡±â·Î Á¤ÇÔ.
+				if (Join_flag) { // ë²½ì„ ì•ˆì¹˜ê¸°ë¡œ ì •í•¨.
 
 					/*
 						+-+-+-+-+-+-+-+-+-+-+
@@ -153,17 +153,17 @@ int main() {
 						+-+-+ +-+-+-+ +-+ + +
 						 4 5   6 7 8   9
 					*/
-					prev_Id = cell[i + 1]; // µû·Î ÀúÀå.
+					prev_Id = cell[i + 1]; // ë”°ë¡œ ì €ìž¥.
 					cell[i + 1] = cell[i];
 
 					/*
 						+-+-+-+-+-+-+-+-+-+-+
 						|0 0 0|1 1 1 1 1|2|3|
-						+-+-+ +-+-+-+ +-+ + + °¡ µÇ°í,
+						+-+-+ +-+-+-+ +-+ + + ê°€ ë˜ê³ ,
 						|4 4   6 7 8   9
 					*/
 
-					// ¿©±â¼­  cellÀÌ 5ÀÎ ¸ðµç ³ðµéÀº ÁË´Ù 4°¡ µÈ´Ù.
+					// ì—¬ê¸°ì„œ  cellì´ 5ì¸ ëª¨ë“  ë†ˆë“¤ì€ ì£„ë‹¤ 4ê°€ ëœë‹¤.
 					for (j = 0; j < WIDTH; j++)
 						if (cell[j] == prev_Id) cell[j] = cell[i];
 					vWall[i] = 0;
@@ -172,39 +172,39 @@ int main() {
 					/*
 						+-+-+-+-+-+-+-+-+-+-+
 						|0 0 0|1 1 1 1 1|2|3|
-						+-+-+ +-+-+-+ +-+ + + ÀÌ·¸°Ô ÇÏ°Ú´Ù´Â ÀÇ¹Ì°¡ µÈ´Ù.
+						+-+-+ +-+-+-+ +-+ + + ì´ë ‡ê²Œ í•˜ê² ë‹¤ëŠ” ì˜ë¯¸ê°€ ëœë‹¤.
 						|4|5   6 7 8   9
 					*/
 					vWall[i] = 1;
 				}
 			}
 			else {
-				//ceilÀÌ °°À¸¸é ¹«Á¶°Ç º®À» ÃÄÁØ´Ù.
+				//ceilì´ ê°™ìœ¼ë©´ ë¬´ì¡°ê±´ ë²½ì„ ì³ì¤€ë‹¤.
 
 				/*
 					+-+-+-+-+-+-+-+-+-+-+
 					|0 0 0|1 1 1 1 1|2|3|
-					+-+-+ + + + + +-+ + +    ÃÊ±â¿¡ ÀÌ·± »óÅÂ¿´´Ù°í °¡Á¤ÇÏÀÚ.
+					+-+-+ + + + + +-+ + +    ì´ˆê¸°ì— ì´ëŸ° ìƒíƒœì˜€ë‹¤ê³  ê°€ì •í•˜ìž.
 					 4 5           6
 
-					 ÀÌ ¶§,
+					 ì´ ë•Œ,
 
 					 +-+-+-+-+-+-+-+-+-+-+
 					 |0 0 0|1 1 1 1 1|2|3|
-					 +-+-+ + + + + +-+ + + ±îÁö ¿Ô´Ù°í ÇÏÀÚ. ±×·¯¸é, ÀÌÈÄ·Î´Â 1°ú 1À» ºñ±³ÇÏ¹Ç·Î, º®À» ¹«Á¶°Ç ÃÄ¾ß ÇÑ´Ù.
+					 +-+-+ + + + + +-+ + + ê¹Œì§€ ì™”ë‹¤ê³  í•˜ìž. ê·¸ëŸ¬ë©´, ì´í›„ë¡œëŠ” 1ê³¼ 1ì„ ë¹„êµí•˜ë¯€ë¡œ, ë²½ì„ ë¬´ì¡°ê±´ ì³ì•¼ í•œë‹¤.
 					 |4|5| |        6
 
 					 +-+-+-+-+-+-+-+-+-+-+
 					 |0 0 0|1 1 1 1 1|2|3|
-					 +-+-+ + + + + +-+ + +  ÀÌ·± ½ÄÀ¸·Î ÇØÁà¾ßÇÔ. ¾È±×·¯¸é cycle ¹ß»ý.
+					 +-+-+ + + + + +-+ + +  ì´ëŸ° ì‹ìœ¼ë¡œ í•´ì¤˜ì•¼í•¨. ì•ˆê·¸ëŸ¬ë©´ cycle ë°œìƒ.
 					 |4|5| | | | |  6
 
 				*/
 
-				// vWall[i] = 1;  °íÄ£ºÎºÐ
+				// vWall[i] = 1;  ê³ ì¹œë¶€ë¶„
 			}
 			if (n == HIGHT - 2) {
-				if (/* cell[i] != cell[i + 1] */ 1) { // °íÄ£ºÎºÐ
+				if (/* cell[i] != cell[i + 1] */ 1) { // ê³ ì¹œë¶€ë¶„
 					vWall[i] = 0;
 					if (cell[i + 1] > cell[i]) cell[i + 1] = cell[i];
 					else cell[i] = cell[i + 1];
